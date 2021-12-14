@@ -1,0 +1,7 @@
+1. Modelo relacional.
+2. Diccionario de datos.
+3 Diagrama de gantt.
+4.Diagrama de despliegue.
+5.Diagrama de clases
+6. Mockup
+7. Normalizacion

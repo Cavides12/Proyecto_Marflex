@@ -1,0 +1,181 @@
+
+create database Marflex;
+
+create table tipoDoc (
+	idtipoDoc INT NOT NULL,
+	tipoDocu VARCHAR(45) NOT NULL,
+	descripcion VARCHAR(100) NOT NULL,
+	PRIMARY KEY (idtipoDoc)
+);
+
+create table admin (
+	docAdmin INT NOT NULL PRIMARY KEY,
+	nombre1 VARCHAR(45) NOT NULL,
+	nombre2 VARCHAR(45) NOT NULL,
+	apellido1 VARCHAR(45) NOT NULL,
+	apellido2 VARCHAR(45) NOT NULL,
+	tipoDoc_idtipoDoc INT NOT NULL,
+	FOREIGN KEY (tipoDoc_idtipoDoc) REFERENCES tipoDoc(idtipoDoc)
+);
+
+create table Cliente (
+	docCliente INT NOT NULL,
+	nombre1 VARCHAR(45) NOT NULL,
+	nombre2 VARCHAR(45),
+	apellido1 VARCHAR(45) NOT NULL,
+	apellido2 VARCHAR(45),
+	tipoDoc_idtipoDoc INT NOT NULL,
+	PRIMARY KEY (docCliente),
+	FOREIGN KEY (tipoDoc_idtipoDoc) REFERENCES tipoDoc(idtipoDoc)
+);
+
+create table Ingreso(
+	correoElec VARCHAR(45) PRIMARY KEY,
+	Contraseña VARCHAR(60),
+	Estado INT NOT NULL,
+	ingreso_docCliente INT NOT NULL,
+	FOREIGN KEY (ingreso_docCliente) REFERENCES Cliente(docCliente)
+);
+
+create table Vendedor (
+	docVendedor INT NOT NULL,
+	nombre VARCHAR(45) NOT NULL,
+	apellido VARCHAR(45) NOT NULL,
+	tipoDoc_idtipoDoc INT NOT NULL,
+	PRIMARY KEY (docVendedor),
+	FOREIGN KEY (tipoDoc_idtipoDoc) REFERENCES tipoDoc(idtipoDoc)
+);
+
+create table formasDePago (
+	idFormasdePago INT NOT NULL,
+	formDePago VARCHAR(30),
+	PRIMARY KEY (idFormasdePago)
+);
+
+create table infoDePago (
+	idInfodePago INT NOT NULL,
+	informacion VARCHAR(20),
+	formaDePago_idFormasdePago INT NOT NULL,
+	PRIMARY KEY (idInfodePago),
+	FOREIGN KEY (formaDePago_idFormasdePago) REFERENCES formasDePago(idFormasdePago)
+);
+
+create table TipoProducto (
+	idTipoProducto INT NOT NULL,
+	descripcionTipoProducto VARCHAR(45) NOT NULL,
+	PRIMARY KEY (idTipoProducto)
+);
+
+create table Color (
+	idColor INT NOT NULL,
+	nombreColor VARCHAR(45) NOT NULL,
+	PRIMARY KEY (idColor)
+);
+
+create table CatalogoMadera (
+	idCatalogoMadera INT NOT NULL,
+	tipoMadera VARCHAR(45) NOT NULL,
+	PRIMARY KEY (idCatalogoMadera)
+);
+
+create table CatalogoTela (
+	idCatalogoTela INT NOT NULL,
+	tipoTela VARCHAR(45) NOT NULL,
+	PRIMARY KEY (idCatalogoTela)
+);
+
+create table Proveedor (
+	idProveedor INT NOT NULL,
+	nombreProvee VARCHAR(45) NOT NULL,
+	contactoProveedor VARCHAR(15) NOT NULL,
+	PRIMARY KEY (idProveedor)
+);
+
+create table Producto (
+	idProducto INT NOT NULL,
+	nombreProducto VARCHAR(45) NOT NULL,
+	descripcion VARCHAR(45) NOT NULL,
+	precio DOUBLE NOT NULL,
+	TipoProducto_idTipoProducto INT NOT NULL,
+	CatalogoMadera_idCatalogoMadera INT NOT NULL,
+	CatalogoTela_idCatalogoTelas INT NOT NULL,
+	Color_idColor INT NOT NULL,
+	Proveedor_idProveedor INT NOT NULL,
+	PRIMARY KEY (idProducto),
+	FOREIGN KEY (TipoProducto_idTipoProducto) REFERENCES TipoProducto(idTipoProducto),
+	FOREIGN KEY (CatalogoMadera_idCatalogoMadera) REFERENCES CatalogoMadera(idCatalogoMadera),
+	FOREIGN KEY (CatalogoTela_idCatalogoTelas) REFERENCES CatalogoTela(idCatalogoTela),
+	FOREIGN KEY (Color_idColor) REFERENCES Color(idColor),
+	FOREIGN KEY (Proveedor_idProveedor) REFERENCES Proveedor(idProveedor)
+	
+);
+
+create table Carrito (
+	idCarrito INT NOT NULL,
+	Cliente_DocCliente INT NOT NULL,
+	PRIMARY KEY (idCarrito),
+	FOREIGN KEY (Cliente_DocCliente) REFERENCES Cliente(docCliente),
+	
+);
+
+create table detalleCarrito (
+	idDetalleCarrito INT AUTO_INCREMENT PRIMARY KEY,
+	Carrito_idCarrito INT NOT NULL,
+	Producto_idProductos INT NOT NULL,
+	cantidad INT NOT NULL,
+	FOREIGN KEY (Carrito_idCarrito) REFERENCES Carrito(idCarrito),
+	FOREIGN KEY (Producto_idProductos) REFERENCES Producto(idProducto)
+);
+
+create table Factura (
+	idFactura INT NOT NULL,
+	fechaFactura DATETIME NOT NULL,
+	infoDePago_idInfodePago INT NOT NULL,
+	Cliente_DocCliente INT NOT NULL,
+	Producto_idProducto INT NOT NULL,
+	Carrito_idCarrito INT NOT NULL,
+	Vendedor_DocVendedor INT NOT NULL,
+	PRIMARY KEY (idFactura),
+	FOREIGN KEY (infoDePago_idInfodePago) REFERENCES infoDePago(idInfodePago),
+	FOREIGN KEY (Carrito_idCarrito) REFERENCES Carrito(idCarrito),
+	FOREIGN KEY (Vendedor_DocVendedor) REFERENCES Vendedor(docVendedor)
+);
+
+
+
+create table Sede (
+	idSede INT NOT NULL,
+	direccionSede VARCHAR(60) NOT NULL,
+	PRIMARY KEY (idSede)
+);
+
+create table Localizacion (
+	idLocalizacion INT NOT NULL,
+	Sede_idSede INT NOT NULL,
+	Prodcuto_idProducto INT NOT NULL,
+	PRIMARY KEY (idLocalizacion),
+	FOREIGN KEY (Sede_idSede) REFERENCES Sede(idSede),
+	FOREIGN KEY (Prodcuto_idProducto) REFERENCES Producto(idProducto)
+);
+
+
+
+create table Pedidos (
+	idPedido INT NOT NULL PRIMARY KEY,
+	Vendedor_DocVendedor INT NOT NULL,
+	Proveedor_idProveedor INT NOT NULL,
+	Sede_idSede INT NOT NULL,
+	ColorProd VARCHAR(20) NOT NULL,
+	Medidas VARCHAR(20) NOT NULL,
+	Especificaciones VARCHAR(100),
+	FechaPedido DATE NOT NULL,
+	FechaEntrega DATE NOT NULL,
+	ValorCotizacion INT NOT NULL,
+	FotoRefe BLOB,
+	FOREIGN KEY(Vendedor_docVendedor) REFERENCES Vendedor(docVendedor),
+	FOREIGN KEY(Proveedor_idProveedor) REFERENCES Proveedor(idProveedor),
+	FOREIGN KEY(Sede_idSede) REFERENCES Sede(idSede)
+);
+
+
+

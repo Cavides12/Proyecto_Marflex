@@ -1,0 +1,116 @@
+
+
+INSERT INTO `tipodoc`(`idtipoDoc`, `tipoDocu`, `descripcion`) VALUES ('1','C.C.','Cedula de Ciudadania'), 
+('2','C.E.','Cedula de Extranjeria'), ('3','P','Pasaporte'), ('4','T.D.E.','Tipo de Documento Extr.');
+
+INSERT INTO `formasdepago`(`idFormasdePago`, `formDePago`) VALUES ('1','Paypal'),('2','Tarjeta Bancaria'),('3','Transferencia Bancaria');
+
+INSERT INTO `tipoproducto`(`idTipoProducto`, `descripcionTipoProducto`) VALUES ('1','Salas'), ('2','Comedores');
+
+INSERT INTO `color`(`idColor`, `nombreColor`) VALUES ('1','Azul'),('2','Negro'),('3','Blanco'),('4','Rojo'),('5','Cafe');
+
+INSERT INTO `catalogomadera`(`idCatalogoMadera`, `tipoMadera`) VALUES ('1','Arce'),('2','Caoba'),('3','Cerezo'),('4','Roble'),('5','Cedro');
+
+INSERT INTO `catalogotela`(`idCatalogoTela`, `tipoTela`) VALUES ('1','Algodon'),('2','Terciopelo'),('3','Lino'),('4','Seda');
+
+INSERT INTO `proveedor`(`idProveedor`, `nombreProvee`, `contactoProveedor`) VALUES ('1','MueblesCund','30X XXXXXXX'),
+('2','Ebanistas JyS','30X XXXXXXX'),('3','Hmanos Torres','30X XXXXXXX'),('4','Relax & Confort','30X XXXXXXX');
+
+INSERT INTO `sede`(`idSede`, `direccionSede`) VALUES ('1','CrX #1-11 AV 3B'),('2','CrX #2-11 AV 3B'),('3','CrX #3-11 AV 3B'),('4','CrX #4-11 AV 3B');
+
+
+
+INSERT INTO `admin`(`docAdmin`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `tipoDoc_idtipoDoc`) VALUES ('1101820466','Camilo','Andres','Vides','Torres','1');
+
+INSERT INTO `cliente`(`docCliente`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `tipoDoc_idtipoDoc`) VALUES ('1001820466','Carlos','Mario','Espitia','Ruiz','2'),('1001820467','Calixto','Jose','Ochoa','Perez','1'),
+('1001820469','Jose','Maria','Alvarez','Gonzales','1'),('1001820468','Ana','Maria','Torres','Jaraba','3'),('1001820410','Carla','','Bisbal','Ballestas','3'),('1001820411','Mario','Jose','Meza','Ruiz','2'),
+('1001820414','Miguel','Angel','Echeverria','Anaya','1'),('1001820413','Francisco','','Oro','Fernandez','4'),('1001820415','Alexandra','','Cardenas','Zabala','1'),('1001820417','Leonardo','Andres','Mercado','Lopez','1');
+
+
+INSERT INTO `ingreso`(`correoElec`, `Contraseña`, `Estado`, `ingreso_docCliente`) VALUES ('user01@correo.com',MD5("123"),'2','1001820466'),('user02@correo.com',MD5("123"),'2','1001820467'),
+('user03@correo.com',MD5("123"),'2','1001820468'),('user04@correo.com',MD5("123"),'2','1001820469'),('user05@correo.com',MD5("123"),'2','1001820410'),('user06@correo.com',MD5("123"),'2','1001820411'),
+('user08@correo.com',MD5("123"),'2','1001820414'),('user07@correo.com',MD5("123"),'2','1001820413'),('user09@correo.com',MD5("123"),'2','1001820415'),('user10@correo.com',MD5("123"),'2','1001820417');
+
+INSERT INTO `vendedor`(`docVendedor`, `nombre`, `apellido`, `tipoDoc_idtipoDoc`) VALUES ('64890022','Jorge','Romero','1'),('64890032','Yonatan','Rojas','1'),('64890042','Sebastian','Lopez','1');
+
+INSERT INTO `producto`(`idProducto`, `nombreProducto`, `descripcion`, `precio`, `TipoProducto_idTipoProducto`, `CatalogoMadera_idCatalogoMadera`, `CatalogoTela_idCatalogoTelas`, `Color_idColor`, `Proveedor_idProveedor`) VALUES ('100','Florencia','4 puestos','2250000','2','4','3','1','3'),
+('101','Romano','4 puestos','2550000','2','1','3','2','2'),('102','Turin','6 puestos','3250000','2','3','1','5','1'),('104','Stambul','6 puestos','2950000','2','4','3','1','3'),('105','Montreal','4 puestos','1970000','2','5','1','4','2'),
+('106','Adventure Dreams','Compartimentos','1570000','1','5','1','4','2'),('107','Cinema Plus','Compartimentos','1870000','1','4','2','3','4'),('108','Italinana','Compartimentos','2470000','1','3','3','1','1'),
+('109','Rouse','Compartimentos','2050000','1','1','1','2','1'),('110','Tibet','Compartimentos','1530000','1','2','4','5','3'),('111','Sofa Adventures','Compartimento','1700000','1','1','1','1','2');
+
+
+INSERT INTO `localizacion`(`idLocalizacion`, `Sede_idSede`, `Prodcuto_idProducto`) VALUES ('1','1','100'),('2','1','101'),('3','1','102'),('5','1','104'),
+('6','1','105'),('7','1','106'),('8','1','107'),('9','1','108'),('10','1','109'),('11','1','110'),('12','1','111'),('13','2','100'),('14','2','101'),('15','2','102'),
+('17','2','104'),('43','2','105'),('18','2','106'),('19','2','107'),('20','1','108'),('21','2','110'),('22','3','100'),
+('23','3','101'),('24','3','102'),('26','3','104'),('27','3','105'),('28','3','106'),('29','3','107'),('30','3','108'),('31','3','109'),('32','3','110'),('33','3','111'),
+('34','4','101'),('35','4','102'),('37','4','104'),('38','4','105'),('39','4','107'),('40','4','108'),('41','4','110'),('42','4','111');
+
+INSERT INTO `infodepago`(`idInfodePago`, `informacion`, `formaDePago_idFormasdePago`) VALUES ('1','############','1'),('2','############','1'),
+('3','############','3'),('4','############','2'),('5','############','2');
+
+INSERT INTO `carrito`(`idCarrito`, `Cliente_DocCliente`) VALUES ('1','1001820466'),('2','1001820467'),('3','1001820468'),('4','1001820469'),('5','1001820410'),('6','1001820411'),
+('7','1001820413'),('8','1001820414'),('9','1001820415'),('10','1001820417');
+
+INSERT INTO `detallecarrito`(`Carrito_idCarrito`, `Producto_idProductos`,`cantidad`) VALUES ('1','100','1'),('1','110','1'),('1','111','1');
+
+INSERT INTO `factura`(`idFactura`, `fechaFactura`, `infoDePago_idInfodePago`, `Cliente_DocCliente`, `Carrito_idCarrito`, `Vendedor_DocVendedor`) VALUES ('301','31-03-2022','1','1001820466','1','64890022');
+
+INSERT INTO `pedidos`(`idPedido`, `Vendedor_DocVendedor`, `Proveedor_idProveedor`, `Sede_idSede`, `ColorProd`, `Medidas`, `Especificaciones`, `FechaPedido`, `FechaEntrega`, `ValorCotizacion`, `FotoRefe`) VALUES ('1','64890022','1','2','Negro','120x100','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','2022-03-30','2022-04-20','2000000','ima/mueble.png');
+
+
+
+SELECT `docCliente`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `tipoDoc_idtipoDoc`;
+
+SELECT * FROM `vendedor`;
+
+SELECT * FROM `producto` :
+
+UPDATE `ingreso` SET Estado ='1' WHERE correoElec ='user01@correo.com';
+
+UPDATE `producto` SET `idProducto`='[value-1]',`nombreProducto`='[value-2]',`descripcion`='[value-3]',`precio`='[value-4]',`TipoProducto_idTipoProducto`='[value-5]',`CatalogoMadera_idCatalogoMadera`='[value-6]',`CatalogoTela_idCatalogoTelas`='[value-7]',`Color_idColor`='[value-8]',`Proveedor_idProveedor`='[value-9]' WHERE id=100;
+
+DELETE FROM `producto` WHERE id = ??;
+
+
+
+
+//JOINS (consultas a varias tablas)//
+
+
+SELECT cliente.nombre1,nombre2,apellido1,apellido2, tipodoc.descripcion 
+FROM cliente 
+INNER JOIN tipodoc ON cliente.tipoDoc_idtipoDoc=tipodoc.idtipoDoc;
+
+
+SELECT producto.idProducto,nombreProducto,precio, tipoproducto.descripcionTipoProducto, catalogotela.tipoTela, catalogomadera.tipoMadera, color.nombreColor, proveedor.nombreProvee
+FROM (((((producto
+INNER JOIN tipoproducto ON producto.TipoProducto_idTipoProducto=tipoproducto.idTipoProducto)
+INNER JOIN catalogomadera ON producto.CatalogoMadera_idCatalogoMadera=catalogomadera.idCatalogoMadera)
+INNER JOIN catalogotela ON producto.CatalogoTela_idCatalogoTelas=catalogotela.idCatalogoTela)
+INNER JOIN color ON producto.Color_idColor=color.idColor)
+INNER JOIN proveedor ON producto.Proveedor_idProveedor=proveedor.idProveedor);
+
+
+
+SELECT carrito.idCarrito,cliente.nombre1,apellido1, producto.nombreProducto,precio
+FROM carrito
+INNER JOIN cliente ON carrito.Cliente_DocCliente=cliente.docCliente
+INNER JOIN detallecarrito ON carrito.idCarrito=detallecarrito.Carrito_idCarrito
+INNER JOIN producto ON detallecarrito.Producto_idProductos=producto.idProducto WHERE carrito.idCarrito = 1;
+
+
+SELECT factura.idFactura,fechaFactura, vendedor.docVendedor,nombre,apellido, carrito.idCarrito,cliente.nombre1,apellido1, producto.nombreProducto,precio
+FROM carrito
+INNER JOIN cliente ON carrito.Cliente_DocCliente=cliente.docCliente
+INNER JOIN detallecarrito ON carrito.idCarrito=detallecarrito.Carrito_idCarrito
+INNER JOIN producto ON detallecarrito.Producto_idProductos=producto.idProducto
+INNER JOIN factura ON factura.Carrito_idCarrito=carrito.idCarrito
+INNER JOIN vendedor ON factura.Vendedor_DocVendedor=vendedor.docVendedor WHERE carrito.idCarrito = 1;
+
+
+SELECT producto.idProducto,nombreProducto, sede.direccionSede, tipoproducto.descripcionTipoProducto
+FROM producto
+INNER JOIN tipoproducto ON producto.TipoProducto_idTipoProducto=tipoproducto.idTipoProducto
+INNER JOIN localizacion ON producto.idProducto=localizacion.Prodcuto_idProducto
+INNER JOIN sede ON sede.idSede=localizacion.Sede_idSede WHERE producto.idProducto =101;
+
